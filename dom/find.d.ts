@@ -1,0 +1,1 @@
+declare module 'berryjs/dom/find.js';

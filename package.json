@@ -1,0 +1,13 @@
+{
+  "name": "berryjs",
+  "version": "1.1.1",
+  "description": "this package gives simple code over complex code",
+  "main": "index.js",
+  "scripts": {
+    "build": "tsc",
+    "start": "node index.js"
+  },
+  "author": "niat786",
+  "license": "ISC",
+  "type": "module"
+}

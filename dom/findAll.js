@@ -1,31 +1,24 @@
-function el(selector = '#id', mode = 'single') {
-    let elements;
-
-    if (mode === 'all' && !selector.startsWith('#')) {
-        elements = document.querySelectorAll(selector);
-    } else {
-        elements = document.querySelector(selector);
-        return elements;
+function find(selector = 'selector') {
+    const element = document.querySelectorAll(selector);
+    if (!element) {
+        console.error(`Element with selector '${selector}' not found`);
+        return null;
     }
-
-    // Define methods for method chaining
-    const methods = {
-        el: function(newSelector) {
-            return el(newSelector, 'all'); // Return selected elements using the new selector
-        },
-        // Add more methods here for additional functionality
-    };
-
-    // Extend elements with methods
-    if (mode === 'all') {
-        elements.forEach((element, index) => {
-            Object.assign(element, methods);
-        });
-    } else {
-        Object.assign(elements, methods);
+    // Recursive function to construct the object with nested find methods
+    function constructFindObject(currentElement) {
+        return {
+            elements: currentElement,
+            find: function (subSelector) {
+                const subElement = currentElement.querySelectorAll(subSelector);
+                if (!subElement) {
+                    console.error(`Child element with selector '${subSelector}' not found`);
+                    return null;
+                }
+                return constructFindObject(subElement);
+            }
+        };
     }
-
-    return elements;
+    // Return the initial object
+    return constructFindObject(element);
 }
-
-export default el;
+export default find;

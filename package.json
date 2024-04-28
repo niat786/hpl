@@ -1,13 +1,30 @@
 {
-  "name": "berryjs",
-  "version": "1.1.1",
-  "description": "this package gives simple code over complex code",
-  "main": "index.js",
-  "scripts": {
-    "build": "tsc",
-    "start": "node index.js"
+  "name": "hpl",
+  "private": false,
+  "version": "0.0.14",
+  "target": "es2020",
+  "module": "commonjs",
+  "outDir": "./",
+  "strict": true,
+  "esModuleInterop": true,
+  "license": "MIT",
+  "keywords": [
+    "JavaScript Helper Functions",
+    "JQuery",
+    "Less JavaScript"
+  ],
+  "author": {
+    "name": "niat786",
+    "url": "https://github.com/niat786"
   },
-  "author": "niat786",
-  "license": "ISC",
-  "type": "module"
+  "scripts": {
+    "dev": "vite",
+    "build": "tsc && vite build",
+    "preview": "vite preview"
+  },
+  "devDependencies": {
+    "typescript": "^5.2.2",
+    "vite": "^5.2.0",
+    "vitest": "^1.5.2"
+  }
 }

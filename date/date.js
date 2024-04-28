@@ -3,13 +3,12 @@ function getDayWithSuffix(day) {
         return day + 'th';
     }
     switch (day % 10) {
-        case 1:  return day + 'st';
-        case 2:  return day + 'nd';
-        case 3:  return day + 'rd';
+        case 1: return day + 'st';
+        case 2: return day + 'nd';
+        case 3: return day + 'rd';
         default: return day + 'th';
     }
 }
-
 function date(format = 'numeric') {
     const currentDate = new Date();
     const year = currentDate.getFullYear();
@@ -20,7 +19,6 @@ function date(format = 'numeric') {
     const dayWithSuffix = getDayWithSuffix(currentDate.getDate());
     const monthFullNames = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
     const monthFullName = monthFullNames[currentDate.getMonth()];
-
     const formatDictionary = {
         'dd/mm/yyyy': `${day}/${month}/${year}`,
         'dd-mm-yyyy': `${day}-${month}-${year}`,
@@ -49,25 +47,23 @@ function date(format = 'numeric') {
         'yyyy-mm': `${year}-${month}`, // ISO 8601
         'YYYY': `${year}`, // ISO 8601
         'yyyy': `${year}`, // ISO 8601
-        'dd': `${day}`, 
-        'DD': `${day}`, 
-        'MM': `${month}`, 
-        'mm': `${month}`, 
+        'dd': `${day}`,
+        'DD': `${day}`,
+        'MM': `${month}`,
+        'mm': `${month}`,
         'DD MMMM YYYY': `${day} ${monthFullName} ${year}`, // International with full month name
         'dd mmmm yyyy': `${day} ${monthFullName} ${year}`, // International with full month name
         'D MMMM YYYY': `${day} ${monthFullName} ${year}`, // International with full month name
         'd mmmm yyyy': `${day} ${monthFullName} ${year}`, // International with full month name
     };
-    
-
     if (format in formatDictionary) {
         return formatDictionary[format];
-    } else if (format === 'numeric') {
+    }
+    else if (format === 'numeric') {
         return currentDate;
-    } else {
-        
+    }
+    else {
         throw new Error(`\x1b[41mInvalid format argument - date('${format}').\x1b[0m\n\nSupported formats are:\n'dd/mm/yyyy', \n'dd-mm-yyyy', \n'yyy/mm/dd', \n'mm-dd-yyyy', \n'dd.mm.yyyy', \n'yyy.mm.dd', \n'mm.dd.yyyy', \n'ordinal', \n'yyyy-mm-dd', \n'dd/mm/yy', \n'mm/dd/yy', \n'DD MMM YYYY', \n'dd mmm yyyy', \n'D MMM YYYY', \n'd mmm yyyy', \n'MMM DD, YYYY', \n'MMM D, YYYY', \n'DD/MM/YYYY', \n'mm/dd/yyyy', \n'MM/DD/YYYY', \n'yyy-mm-dd', \n'YYYY-MM-DD', \n'YYYY-MM', \n'yyyy-mm', \n'YYYY', \n'yyyy', \n'dd', \n'DD', \n'MM', \n'mm', \n'DD MMMM YYYY', \n'dd mmmm yyyy', \n'D MMMM YYYY', \n'd mmmm yyyy'\nPlease ensure you are using one of the supported formats.\n`);
-        }
+    }
 }
-
 export default date;

@@ -1,4 +1,4 @@
 function hours() {
     return new Date().getHours();
 }
-export default hours
+export default hours;

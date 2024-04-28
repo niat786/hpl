@@ -1,1 +1,2 @@
-declare module 'berryjs/dom/find.js';
+declare function find(...args: any): any;
+export default find;

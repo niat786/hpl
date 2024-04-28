@@ -22,8 +22,8 @@ export function isValidEmail(email, rules) {
             return allowedDomains.includes(domain);
         },
         TLD: (email, allowedTLDs) => {
-            const domain = email.split('@')[1]; // Extract the domain part of the email
-            const tld = domain.split('.').pop(); // Extract the TLD from the domain
+            const domain = email.split('@')[1];
+            const tld = domain.split('.').pop();
             return tld !== undefined && (allowedTLDs.includes('.' + tld) || allowedTLDs.includes(tld));
         }
     };
@@ -51,7 +51,6 @@ export function isValidEmail(email, rules) {
                     }
                     break;
                 case 'unique':
-                    // Assuming there's an external list of emails provided
                     if (!defaultRules.unique(email, ['list', 'of', 'emails'])) {
                         validationResult.message = 'Email should be unique';
                         validationResult.type = 'error';
@@ -80,7 +79,6 @@ export function isValidEmail(email, rules) {
     }
     return validationResult;
 }
-// password validation
 export function isValidPassword(password, rules) {
     const defaultRules = {
         min: (password, minChars) => {
@@ -174,7 +172,6 @@ export function isValidPassword(password, rules) {
     }
     return validationResult;
 }
-// URL validation
 export function isValidURL(url, rules) {
     const urlRegex = /^(?:(https?|ftp):\/\/)?(?:www\.)?([a-zA-Z0-9-_.]+\.[a-zA-Z]{2,})(?:\/\S*)?$/i;
     const ftpUrlRegex = /^ftp:\/\/(?:\S+:\S+@)?(?:[a-zA-Z\d.-]+|\[[a-fA-F\d:]+\])(?::\d+)?(?:\/\S*)?$/i;
@@ -183,7 +180,6 @@ export function isValidURL(url, rules) {
         type: 'success',
         code: 'VALID_URL'
     };
-    // Check URL syntax
     if (!(urlRegex.test(url) || ftpUrlRegex.test(url)) && !(rules?.includes('ftponly') || rules?.includes('ftpOnly') || rules?.includes('ftp'))) {
         return {
             message: 'The URL syntax is incorrect',
@@ -191,20 +187,10 @@ export function isValidURL(url, rules) {
             code: 'INVALID_URL_SYNTAX'
         };
     }
-    // Default rules for URL validation
     const defaultRules = {
         allowHttp: (url) => /^https?:\/\//i.test(url),
         allowFtp: (url) => /^ftp:\/\//i.test(url),
-        // validDomain: (url: string): boolean => {
-        //     const domainRegex = /^(https?|ftp):\/\/([^/:]+)(:\d*)?([^# ]*)$/i;
-        //     const match = url.match(domainRegex);
-        //     if (!match) return false;
-        //     const domain = match[2];
-        //     const topLevelDomainRegex = /^[^.]+\.([^.]{2,}|xn--[a-z0-9]+)$/;
-        //     return topLevelDomainRegex.test(domain);
-        // }
     };
-    // Apply rules
     if (rules) {
         rules.forEach(rule => {
             switch (rule.toLowerCase()) {
@@ -245,13 +231,6 @@ export function isValidURL(url, rules) {
                         validationResult.type = 'error';
                     }
                     break;
-                // case 'validdomain':
-                //     if (!defaultRules.validDomain(url)) {
-                //         validationResult.message = 'URL should have a valid domain';
-                //         validationResult.code = 'INVALID_URL_DOMAIN';
-                //         validationResult.type = 'error';
-                //     }
-                //     break;
                 default:
                     validationResult.message = `Invalid Rule: ${rule}`;
                     validationResult.code = 'INVALID_URL_RULE';

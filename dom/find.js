@@ -19,7 +19,6 @@ function find(...args) {
         console.error(`Element with selector '${selector}' not found`);
         return null;
     }
-    // Recursive function to construct the object with nested find methods
     function constructFindObject(currentElement) {
         return {
             element: currentElement,

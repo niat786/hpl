@@ -8,10 +8,3 @@ function createElement(tagName, attributes) {
     return element;
 }
 export default createElement;
-// usage:
-// const myElement = createElement('div', {
-//     id: 'div-id',
-//     class: 'div_class',
-//     style: 'color: green;'
-// });
-// document.body.appendChild(myElement);

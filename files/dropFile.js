@@ -4,20 +4,16 @@ function dropFile(dropAreaId, callback) {
         console.error(`Drop area with ID "${dropAreaId}" not found.`);
         return;
     }
-    // Prevent default behavior for drag events
     ['dragenter', 'dragover', 'dragleave', 'drop'].forEach(eventName => {
         dropArea.addEventListener(eventName, preventDefaults, false);
         document.body.addEventListener(eventName, preventDefaults, false);
     });
-    // Highlight drop area when file is dragged over it
     ['dragenter', 'dragover'].forEach(eventName => {
         dropArea.addEventListener(eventName, highlight, false);
     });
-    // Unhighlight drop area when file is dragged out of it
     ['dragleave', 'drop'].forEach(eventName => {
         dropArea.addEventListener(eventName, unhighlight, false);
     });
-    // Handle dropped files
     dropArea.addEventListener('drop', handleDrop, false);
     function preventDefaults(event) {
         event.preventDefault();

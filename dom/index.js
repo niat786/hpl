@@ -19,7 +19,6 @@ export function find(...args) {
         console.error(`Element with selector '${selector}' not found`);
         return null;
     }
-    // Recursive function to construct the object with nested find methods
     function constructFindObject(currentElement) {
         return {
             element: currentElement,
@@ -44,14 +43,12 @@ export function find(...args) {
     }
     return element;
 }
-// find all
 export function findAll(selector = 'selector') {
     const element = document.querySelectorAll(selector);
     if (!element) {
         console.error(`Element with selector '${selector}' not found`);
         return null;
     }
-    // Recursive function to construct the object with nested find methods
     function constructFindObject(currentElement) {
         return {
             elements: currentElement,
@@ -65,6 +62,5 @@ export function findAll(selector = 'selector') {
             }
         };
     }
-    // Return the initial object
     return constructFindObject(element);
 }

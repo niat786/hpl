@@ -1,7 +1,7 @@
 {
   "name": "hpl",
   "private": false,
-  "version": "0.0.14",
+  "version": "0.0.15",
   "target": "es2020",
   "module": "commonjs",
   "outDir": "./",

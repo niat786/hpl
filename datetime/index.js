@@ -1,5 +1,14 @@
 export function time() {
-    return new Date().getTime();
+    const currentDateTime = new Date();
+    const year = currentDateTime.getFullYear();
+    const month = currentDateTime.getMonth() + 1;
+    const day = currentDateTime.getDate();
+    const hours = currentDateTime.getHours();
+    const minutes = currentDateTime.getMinutes();
+    const seconds = currentDateTime.getSeconds();
+    const milliseconds = currentDateTime.getMilliseconds();
+    const time = { hours, minutes, seconds, milliseconds, day, month, year };
+    return time;
 }
 function getDayWithSuffix(day) {
     if (day >= 11 && day <= 13) {
@@ -26,7 +35,7 @@ export function date(format = 'numeric') {
         'dd/mm/yyyy': `${day}/${month}/${year}`,
         'dd-mm-yyyy': `${day}-${month}-${year}`,
         'yyy/mm/dd': `${year}/${month}/${day}`,
-        'mm-dd-yyyy': `${month}-${day}/${year}`,
+        'mm-dd-yyyy': `${month}-${day}-${year}`,
         'dd.mm.yyyy': `${day}.${month}.${year}`,
         'yyy.mm.dd': `${year}.${month}.${day}`,
         'mm.dd.yyyy': `${month}.${day}.${year}`,
@@ -70,16 +79,31 @@ export function date(format = 'numeric') {
     }
 }
 export function day() {
-    return new Date().getDay();
+    const dayNumber = new Date().getDay();
+    const daysOfWeek = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
+    const dayString = daysOfWeek[dayNumber];
+    return { dayNumber, dayString };
 }
 export function hours() {
-    return new Date().getHours();
+    const currentDate = new Date();
+    const hours = currentDate.getHours();
+    const isAM = currentDate.toLocaleTimeString().split(' ')[1] == 'AM';
+    return { hours, AM: isAM };
 }
 export function minutes() {
     return new Date().getMinutes();
 }
 export function month() {
-    return new Date().getMonth() + 1;
+    const currentDate = new Date();
+    const year = currentDate.getFullYear();
+    const monthNumber = currentDate.getMonth() + 1;
+    const monthNames = [
+        "January", "February", "March", "April", "May", "June",
+        "July", "August", "September", "October", "November", "December"
+    ];
+    const monthName = monthNames[currentDate.getMonth()];
+    const numberOfDays = new Date(year, monthNumber, 0).getDate();
+    return { monthNumber, monthName, numberOfDays };
 }
 export function seconds() {
     return new Date().getSeconds();
@@ -88,5 +112,14 @@ export function milliseconds() {
     return new Date().getMilliseconds();
 }
 export function year() {
-    return new Date().getFullYear();
+    const date = new Date();
+    const year = date.getFullYear();
+    const isLeapYear = (year % 4 === 0 && year % 100 !== 0) || year % 400 === 0;
+    return { year, isLeapYear: isLeapYear };
+}
+export function isLeapYear(year) {
+    if (!year) {
+        year = new Date().getFullYear();
+    }
+    return (year % 4 === 0 && year % 100 !== 0) || year % 400 === 0;
 }

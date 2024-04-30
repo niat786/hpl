@@ -1,0 +1,1 @@
+export declare function form(formID: string): object;
